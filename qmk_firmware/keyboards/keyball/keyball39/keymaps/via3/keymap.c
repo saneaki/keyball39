@@ -242,198 +242,92 @@ combo_t key_combos[] = {
     [PYO_COMBO] = COMBO_ACTION(pyo_combo),
 };
 
+// コンボキー出力テーブル（容量削減のためテーブル化）
+typedef struct {
+    uint16_t key1;
+    uint16_t key2;
+    uint16_t key3;
+} combo_output_t;
+
+const combo_output_t PROGMEM combo_outputs[] = {
+    // 濁音
+    [GA_COMBO] = {S(KC_R), S(KC_T), KC_NO},
+    [GI_COMBO] = {S(KC_R), S(KC_Y), KC_NO},
+    [GU_COMBO] = {S(KC_R), S(KC_U), KC_NO},
+    [GE_COMBO] = {S(KC_R), S(KC_I), KC_NO},
+    [GO_COMBO] = {S(KC_R), S(KC_O), KC_NO},
+    [ZA_COMBO] = {S(KC_F), S(KC_T), KC_NO},
+    [ZI_COMBO] = {S(KC_F), S(KC_Y), KC_NO},
+    [ZU_COMBO] = {S(KC_F), S(KC_U), KC_NO},
+    [ZE_COMBO] = {S(KC_F), S(KC_I), KC_NO},
+    [ZO_COMBO] = {S(KC_F), S(KC_O), KC_NO},
+    [DA_COMBO] = {S(KC_G), S(KC_T), KC_NO},
+    [DI_COMBO] = {S(KC_G), S(KC_Y), KC_NO},
+    [DU_COMBO] = {S(KC_G), S(KC_U), KC_NO},
+    [DE_COMBO] = {S(KC_G), S(KC_I), KC_NO},
+    [DO_COMBO] = {S(KC_G), S(KC_O), KC_NO},
+    [BA_COMBO] = {S(KC_V), S(KC_T), KC_NO},
+    [BI_COMBO] = {S(KC_V), S(KC_Y), KC_NO},
+    [BU_COMBO] = {S(KC_V), S(KC_U), KC_NO},
+    [BE_COMBO] = {S(KC_V), S(KC_I), KC_NO},
+    [BO_COMBO] = {S(KC_V), S(KC_O), KC_NO},
+    // 半濁音
+    [PA_COMBO] = {S(KC_B), S(KC_T), KC_NO},
+    [PI_COMBO] = {S(KC_B), S(KC_Y), KC_NO},
+    [PU_COMBO] = {S(KC_B), S(KC_U), KC_NO},
+    [PE_COMBO] = {S(KC_B), S(KC_I), KC_NO},
+    [PO_COMBO] = {S(KC_B), S(KC_O), KC_NO},
+    // 拗音
+    [KYA_COMBO] = {KC_K, S(KC_Q), KC_NO},
+    [KYU_COMBO] = {KC_K, S(KC_W), KC_NO},
+    [KYO_COMBO] = {KC_K, S(KC_E), KC_NO},
+    [SYA_COMBO] = {KC_S, S(KC_Q), KC_NO},
+    [SYU_COMBO] = {KC_S, S(KC_W), KC_NO},
+    [SYO_COMBO] = {KC_S, S(KC_E), KC_NO},
+    [CHA_COMBO] = {KC_T, S(KC_Q), KC_NO},
+    [CHU_COMBO] = {KC_T, S(KC_W), KC_NO},
+    [CHO_COMBO] = {KC_T, S(KC_E), KC_NO},
+    [NYA_COMBO] = {KC_N, S(KC_Q), KC_NO},
+    [NYU_COMBO] = {KC_N, S(KC_W), KC_NO},
+    [NYO_COMBO] = {KC_N, S(KC_E), KC_NO},
+    [HYA_COMBO] = {KC_H, S(KC_Q), KC_NO},
+    [HYU_COMBO] = {KC_H, S(KC_W), KC_NO},
+    [HYO_COMBO] = {KC_H, S(KC_E), KC_NO},
+    [MYA_COMBO] = {KC_M, S(KC_Q), KC_NO},
+    [MYU_COMBO] = {KC_M, S(KC_W), KC_NO},
+    [MYO_COMBO] = {KC_M, S(KC_E), KC_NO},
+    [RYA_COMBO] = {KC_R, S(KC_Q), KC_NO},
+    [RYU_COMBO] = {KC_R, S(KC_W), KC_NO},
+    [RYO_COMBO] = {KC_R, S(KC_E), KC_NO},
+    [GYA_COMBO] = {S(KC_R), S(KC_Y), S(KC_Q)},
+    [GYU_COMBO] = {S(KC_R), S(KC_Y), S(KC_W)},
+    [GYO_COMBO] = {S(KC_R), S(KC_Y), S(KC_E)},
+    [ZYA_COMBO] = {S(KC_F), S(KC_Y), S(KC_Q)},
+    [ZYU_COMBO] = {S(KC_F), S(KC_Y), S(KC_W)},
+    [ZYO_COMBO] = {S(KC_F), S(KC_Y), S(KC_E)},
+    [DYA_COMBO] = {S(KC_G), S(KC_Y), S(KC_Q)},
+    [DYU_COMBO] = {S(KC_G), S(KC_Y), S(KC_W)},
+    [DYO_COMBO] = {S(KC_G), S(KC_Y), S(KC_E)},
+    [BYA_COMBO] = {S(KC_V), S(KC_Y), S(KC_Q)},
+    [BYU_COMBO] = {S(KC_V), S(KC_Y), S(KC_W)},
+    [BYO_COMBO] = {S(KC_V), S(KC_Y), S(KC_E)},
+    [PYA_COMBO] = {S(KC_B), S(KC_Y), S(KC_Q)},
+    [PYU_COMBO] = {S(KC_B), S(KC_Y), S(KC_W)},
+    [PYO_COMBO] = {S(KC_B), S(KC_Y), S(KC_E)},
+};
+
 // コンボキーが押されたときの処理
 void process_combo_event(uint16_t combo_index, bool pressed) {
-    if (pressed) {
-        switch(combo_index) {
-            // 濁音
-            case GA_COMBO:
-                tap_code16(S(KC_R)); tap_code16(S(KC_T));
-                break;
-            case GI_COMBO:
-                tap_code16(S(KC_R)); tap_code16(S(KC_Y));
-                break;
-            case GU_COMBO:
-                tap_code16(S(KC_R)); tap_code16(S(KC_U));
-                break;
-            case GE_COMBO:
-                tap_code16(S(KC_R)); tap_code16(S(KC_I));
-                break;
-            case GO_COMBO:
-                tap_code16(S(KC_R)); tap_code16(S(KC_O));
-                break;
-            case ZA_COMBO:
-                tap_code16(S(KC_F)); tap_code16(S(KC_T));
-                break;
-            case ZI_COMBO:
-                tap_code16(S(KC_F)); tap_code16(S(KC_Y));
-                break;
-            case ZU_COMBO:
-                tap_code16(S(KC_F)); tap_code16(S(KC_U));
-                break;
-            case ZE_COMBO:
-                tap_code16(S(KC_F)); tap_code16(S(KC_I));
-                break;
-            case ZO_COMBO:
-                tap_code16(S(KC_F)); tap_code16(S(KC_O));
-                break;
-            case DA_COMBO:
-                tap_code16(S(KC_G)); tap_code16(S(KC_T));
-                break;
-            case DI_COMBO:
-                tap_code16(S(KC_G)); tap_code16(S(KC_Y));
-                break;
-            case DU_COMBO:
-                tap_code16(S(KC_G)); tap_code16(S(KC_U));
-                break;
-            case DE_COMBO:
-                tap_code16(S(KC_G)); tap_code16(S(KC_I));
-                break;
-            case DO_COMBO:
-                tap_code16(S(KC_G)); tap_code16(S(KC_O));
-                break;
-            case BA_COMBO:
-                tap_code16(S(KC_V)); tap_code16(S(KC_T));
-                break;
-            case BI_COMBO:
-                tap_code16(S(KC_V)); tap_code16(S(KC_Y));
-                break;
-            case BU_COMBO:
-                tap_code16(S(KC_V)); tap_code16(S(KC_U));
-                break;
-            case BE_COMBO:
-                tap_code16(S(KC_V)); tap_code16(S(KC_I));
-                break;
-            case BO_COMBO:
-                tap_code16(S(KC_V)); tap_code16(S(KC_O));
-                break;
-            
-            // 半濁音
-            case PA_COMBO:
-                tap_code16(S(KC_B)); tap_code16(S(KC_T));
-                break;
-            case PI_COMBO:
-                tap_code16(S(KC_B)); tap_code16(S(KC_Y));
-                break;
-            case PU_COMBO:
-                tap_code16(S(KC_B)); tap_code16(S(KC_U));
-                break;
-            case PE_COMBO:
-                tap_code16(S(KC_B)); tap_code16(S(KC_I));
-                break;
-            case PO_COMBO:
-                tap_code16(S(KC_B)); tap_code16(S(KC_O));
-                break;
-            
-            // 拗音
-            case KYA_COMBO:
-                tap_code(KC_K); tap_code16(S(KC_Q));
-                break;
-            case KYU_COMBO:
-                tap_code(KC_K); tap_code16(S(KC_W));
-                break;
-            case KYO_COMBO:
-                tap_code(KC_K); tap_code16(S(KC_E));
-                break;
-            case SYA_COMBO:
-                tap_code(KC_S); tap_code16(S(KC_Q));
-                break;
-            case SYU_COMBO:
-                tap_code(KC_S); tap_code16(S(KC_W));
-                break;
-            case SYO_COMBO:
-                tap_code(KC_S); tap_code16(S(KC_E));
-                break;
-            case CHA_COMBO:
-                tap_code(KC_T); tap_code16(S(KC_Q));
-                break;
-            case CHU_COMBO:
-                tap_code(KC_T); tap_code16(S(KC_W));
-                break;
-            case CHO_COMBO:
-                tap_code(KC_T); tap_code16(S(KC_E));
-                break;
-            case NYA_COMBO:
-                tap_code(KC_N); tap_code16(S(KC_Q));
-                break;
-            case NYU_COMBO:
-                tap_code(KC_N); tap_code16(S(KC_W));
-                break;
-            case NYO_COMBO:
-                tap_code(KC_N); tap_code16(S(KC_E));
-                break;
-            case HYA_COMBO:
-                tap_code(KC_H); tap_code16(S(KC_Q));
-                break;
-            case HYU_COMBO:
-                tap_code(KC_H); tap_code16(S(KC_W));
-                break;
-            case HYO_COMBO:
-                tap_code(KC_H); tap_code16(S(KC_E));
-                break;
-            case MYA_COMBO:
-                tap_code(KC_M); tap_code16(S(KC_Q));
-                break;
-            case MYU_COMBO:
-                tap_code(KC_M); tap_code16(S(KC_W));
-                break;
-            case MYO_COMBO:
-                tap_code(KC_M); tap_code16(S(KC_E));
-                break;
-            case RYA_COMBO:
-                tap_code(KC_R); tap_code16(S(KC_Q));
-                break;
-            case RYU_COMBO:
-                tap_code(KC_R); tap_code16(S(KC_W));
-                break;
-            case RYO_COMBO:
-                tap_code(KC_R); tap_code16(S(KC_E));
-                break;
-            case GYA_COMBO:
-                tap_code16(S(KC_R)); tap_code16(S(KC_Y)); tap_code16(S(KC_Q));
-                break;
-            case GYU_COMBO:
-                tap_code16(S(KC_R)); tap_code16(S(KC_Y)); tap_code16(S(KC_W));
-                break;
-            case GYO_COMBO:
-                tap_code16(S(KC_R)); tap_code16(S(KC_Y)); tap_code16(S(KC_E));
-                break;
-            case ZYA_COMBO:
-                tap_code16(S(KC_F)); tap_code16(S(KC_Y)); tap_code16(S(KC_Q));
-                break;
-            case ZYU_COMBO:
-                tap_code16(S(KC_F)); tap_code16(S(KC_Y)); tap_code16(S(KC_W));
-                break;
-            case ZYO_COMBO:
-                tap_code16(S(KC_F)); tap_code16(S(KC_Y)); tap_code16(S(KC_E));
-                break;
-            case DYA_COMBO:
-                tap_code16(S(KC_G)); tap_code16(S(KC_Y)); tap_code16(S(KC_Q));
-                break;
-            case DYU_COMBO:
-                tap_code16(S(KC_G)); tap_code16(S(KC_Y)); tap_code16(S(KC_W));
-                break;
-            case DYO_COMBO:
-                tap_code16(S(KC_G)); tap_code16(S(KC_Y)); tap_code16(S(KC_E));
-                break;
-            case BYA_COMBO:
-                tap_code16(S(KC_V)); tap_code16(S(KC_Y)); tap_code16(S(KC_Q));
-                break;
-            case BYU_COMBO:
-                tap_code16(S(KC_V)); tap_code16(S(KC_Y)); tap_code16(S(KC_W));
-                break;
-            case BYO_COMBO:
-                tap_code16(S(KC_V)); tap_code16(S(KC_Y)); tap_code16(S(KC_E));
-                break;
-            case PYA_COMBO:
-                tap_code16(S(KC_B)); tap_code16(S(KC_Y)); tap_code16(S(KC_Q));
-                break;
-            case PYU_COMBO:
-                tap_code16(S(KC_B)); tap_code16(S(KC_Y)); tap_code16(S(KC_W));
-                break;
-            case PYO_COMBO:
-                tap_code16(S(KC_B)); tap_code16(S(KC_Y)); tap_code16(S(KC_E));
-                break;
+    if (pressed && combo_index < COMBO_LENGTH) {
+        combo_output_t output;
+        memcpy_P(&output, &combo_outputs[combo_index], sizeof(combo_output_t));
+        
+        tap_code16(output.key1);
+        if (output.key2 != KC_NO) {
+            tap_code16(output.key2);
+        }
+        if (output.key3 != KC_NO) {
+            tap_code16(output.key3);
         }
     }
 }
@@ -522,13 +416,3 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return state;
 }
 
-#ifdef OLED_ENABLE
-
-#    include "lib/oledkit/oledkit.h"
-
-void oledkit_render_info_user(void) {
-    keyball_oled_render_keyinfo();
-    keyball_oled_render_ballinfo();
-    keyball_oled_render_layerinfo();
-}
-#endif
