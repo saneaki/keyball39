@@ -250,70 +250,71 @@ typedef struct {
 } combo_output_t;
 
 const combo_output_t PROGMEM combo_outputs[] = {
-    // 濁音
-    [GA_COMBO] = {S(KC_R), S(KC_T), KC_NO},
-    [GI_COMBO] = {S(KC_R), S(KC_Y), KC_NO},
-    [GU_COMBO] = {S(KC_R), S(KC_U), KC_NO},
-    [GE_COMBO] = {S(KC_R), S(KC_I), KC_NO},
-    [GO_COMBO] = {S(KC_R), S(KC_O), KC_NO},
-    [ZA_COMBO] = {S(KC_F), S(KC_T), KC_NO},
-    [ZI_COMBO] = {S(KC_F), S(KC_Y), KC_NO},
-    [ZU_COMBO] = {S(KC_F), S(KC_U), KC_NO},
-    [ZE_COMBO] = {S(KC_F), S(KC_I), KC_NO},
-    [ZO_COMBO] = {S(KC_F), S(KC_O), KC_NO},
-    [DA_COMBO] = {S(KC_G), S(KC_T), KC_NO},
-    [DI_COMBO] = {S(KC_G), S(KC_Y), KC_NO},
-    [DU_COMBO] = {S(KC_G), S(KC_U), KC_NO},
-    [DE_COMBO] = {S(KC_G), S(KC_I), KC_NO},
-    [DO_COMBO] = {S(KC_G), S(KC_O), KC_NO},
-    [BA_COMBO] = {S(KC_V), S(KC_T), KC_NO},
-    [BI_COMBO] = {S(KC_V), S(KC_Y), KC_NO},
-    [BU_COMBO] = {S(KC_V), S(KC_U), KC_NO},
-    [BE_COMBO] = {S(KC_V), S(KC_I), KC_NO},
-    [BO_COMBO] = {S(KC_V), S(KC_O), KC_NO},
-    // 半濁音
-    [PA_COMBO] = {S(KC_B), S(KC_T), KC_NO},
-    [PI_COMBO] = {S(KC_B), S(KC_Y), KC_NO},
-    [PU_COMBO] = {S(KC_B), S(KC_U), KC_NO},
-    [PE_COMBO] = {S(KC_B), S(KC_I), KC_NO},
-    [PO_COMBO] = {S(KC_B), S(KC_O), KC_NO},
-    // 拗音
-    [KYA_COMBO] = {KC_K, S(KC_Q), KC_NO},
-    [KYU_COMBO] = {KC_K, S(KC_W), KC_NO},
-    [KYO_COMBO] = {KC_K, S(KC_E), KC_NO},
-    [SYA_COMBO] = {KC_S, S(KC_Q), KC_NO},
-    [SYU_COMBO] = {KC_S, S(KC_W), KC_NO},
-    [SYO_COMBO] = {KC_S, S(KC_E), KC_NO},
-    [CHA_COMBO] = {KC_T, S(KC_Q), KC_NO},
-    [CHU_COMBO] = {KC_T, S(KC_W), KC_NO},
-    [CHO_COMBO] = {KC_T, S(KC_E), KC_NO},
-    [NYA_COMBO] = {KC_N, S(KC_Q), KC_NO},
-    [NYU_COMBO] = {KC_N, S(KC_W), KC_NO},
-    [NYO_COMBO] = {KC_N, S(KC_E), KC_NO},
-    [HYA_COMBO] = {KC_H, S(KC_Q), KC_NO},
-    [HYU_COMBO] = {KC_H, S(KC_W), KC_NO},
-    [HYO_COMBO] = {KC_H, S(KC_E), KC_NO},
-    [MYA_COMBO] = {KC_M, S(KC_Q), KC_NO},
-    [MYU_COMBO] = {KC_M, S(KC_W), KC_NO},
-    [MYO_COMBO] = {KC_M, S(KC_E), KC_NO},
-    [RYA_COMBO] = {KC_R, S(KC_Q), KC_NO},
-    [RYU_COMBO] = {KC_R, S(KC_W), KC_NO},
-    [RYO_COMBO] = {KC_R, S(KC_E), KC_NO},
-    [GYA_COMBO] = {S(KC_R), S(KC_Y), S(KC_Q)},
-    [GYU_COMBO] = {S(KC_R), S(KC_Y), S(KC_W)},
-    [GYO_COMBO] = {S(KC_R), S(KC_Y), S(KC_E)},
-    [ZYA_COMBO] = {S(KC_F), S(KC_Y), S(KC_Q)},
-    [ZYU_COMBO] = {S(KC_F), S(KC_Y), S(KC_W)},
-    [ZYO_COMBO] = {S(KC_F), S(KC_Y), S(KC_E)},
-    [DYA_COMBO] = {S(KC_G), S(KC_Y), S(KC_Q)},
-    [DYU_COMBO] = {S(KC_G), S(KC_Y), S(KC_W)},
-    [DYO_COMBO] = {S(KC_G), S(KC_Y), S(KC_E)},
-    [BYA_COMBO] = {S(KC_V), S(KC_Y), S(KC_Q)},
-    [BYU_COMBO] = {S(KC_V), S(KC_Y), S(KC_W)},
-    [BYO_COMBO] = {S(KC_V), S(KC_Y), S(KC_E)},
-    [PYA_COMBO] = {S(KC_B), S(KC_Y), S(KC_Q)},
-    [PYU_COMBO] = {S(KC_B), S(KC_Y), S(KC_W)},
-    [PYO_COMBO] = {S(KC_B), S(KC_Y), S(KC_E)},
+    // 濁音 (キー + ゙゚)
+    [GA_COMBO] = {KC_T, KC_LBRC, KC_NO},      // か + ゛ = が
+    [GI_COMBO] = {KC_G, KC_LBRC, KC_NO},      // き + ゛ = ぎ
+    [GU_COMBO] = {KC_H, KC_LBRC, KC_NO},      // く + ゛ = ぐ
+    [GE_COMBO] = {KC_QUOT, KC_LBRC, KC_NO},   // け + ゛ = げ
+    [GO_COMBO] = {KC_B, KC_LBRC, KC_NO},      // こ + ゛ = ご
+    [ZA_COMBO] = {KC_X, KC_LBRC, KC_NO},      // さ + ゛ = ざ
+    [ZI_COMBO] = {KC_D, KC_LBRC, KC_NO},      // し + ゛ = じ
+    [ZU_COMBO] = {KC_R, KC_LBRC, KC_NO},      // す + ゛ = ず
+    [ZE_COMBO] = {KC_P, KC_LBRC, KC_NO},      // せ + ゛ = ぜ
+    [ZO_COMBO] = {KC_C, KC_LBRC, KC_NO},      // そ + ゛ = ぞ
+    [DA_COMBO] = {KC_Q, KC_LBRC, KC_NO},      // た + ゛ = だ
+    [DI_COMBO] = {KC_A, KC_LBRC, KC_NO},      // ち + ゛ = ぢ
+    [DU_COMBO] = {KC_Z, KC_LBRC, KC_NO},      // つ + ゛ = づ
+    [DE_COMBO] = {KC_W, KC_LBRC, KC_NO},      // て + ゛ = で
+    [DO_COMBO] = {KC_S, KC_LBRC, KC_NO},      // と + ゛ = ど
+    [BA_COMBO] = {KC_F, KC_LBRC, KC_NO},      // は + ゛ = ば
+    [BI_COMBO] = {KC_V, KC_LBRC, KC_NO},      // ひ + ゛ = び
+    [BU_COMBO] = {KC_2, KC_LBRC, KC_NO},      // ふ + ゛ = ぶ
+    [BE_COMBO] = {KC_MINUS, KC_LBRC, KC_NO},  // へ + ゛ = べ
+    [BO_COMBO] = {KC_6, KC_LBRC, KC_NO},      // ほ + ゛ = ぼ
+    // 半濁音 (キー + ゙゜)
+    [PA_COMBO] = {KC_F, KC_RBRC, KC_NO},      // は + ゜ = ぱ
+    [PI_COMBO] = {KC_V, KC_RBRC, KC_NO},      // ひ + ゜ = ぴ
+    [PU_COMBO] = {KC_2, KC_RBRC, KC_NO},      // ふ + ゜ = ぷ
+    [PE_COMBO] = {KC_MINUS, KC_RBRC, KC_NO},  // へ + ゜ = ぺ
+    [PO_COMBO] = {KC_6, KC_RBRC, KC_NO},      // ほ + ゜ = ぽ
+    // 拗音 (キー + 小文字)
+    [KYA_COMBO] = {KC_G, S(KC_Q), KC_NO},     // き + ゃ = きゃ
+    [KYU_COMBO] = {KC_G, S(KC_W), KC_NO},     // き + ゅ = きゅ
+    [KYO_COMBO] = {KC_G, S(KC_E), KC_NO},     // き + ょ = きょ
+    [SYA_COMBO] = {KC_D, S(KC_Q), KC_NO},     // し + ゃ = しゃ
+    [SYU_COMBO] = {KC_D, S(KC_W), KC_NO},     // し + ゅ = しゅ
+    [SYO_COMBO] = {KC_D, S(KC_E), KC_NO},     // し + ょ = しょ
+    [CHA_COMBO] = {KC_A, S(KC_Q), KC_NO},     // ち + ゃ = ちゃ
+    [CHU_COMBO] = {KC_A, S(KC_W), KC_NO},     // ち + ゅ = ちゅ
+    [CHO_COMBO] = {KC_A, S(KC_E), KC_NO},     // ち + ょ = ちょ
+    [NYA_COMBO] = {KC_I, S(KC_Q), KC_NO},     // に + ゃ = にゃ
+    [NYU_COMBO] = {KC_I, S(KC_W), KC_NO},     // に + ゅ = にゅ
+    [NYO_COMBO] = {KC_I, S(KC_E), KC_NO},     // に + ょ = にょ
+    [HYA_COMBO] = {KC_V, S(KC_Q), KC_NO},     // ひ + ゃ = ひゃ
+    [HYU_COMBO] = {KC_V, S(KC_W), KC_NO},     // ひ + ゅ = ひゅ
+    [HYO_COMBO] = {KC_V, S(KC_E), KC_NO},     // ひ + ょ = ひょ
+    [MYA_COMBO] = {KC_N, S(KC_Q), KC_NO},     // み + ゃ = みゃ
+    [MYU_COMBO] = {KC_N, S(KC_W), KC_NO},     // み + ゅ = みゅ
+    [MYO_COMBO] = {KC_N, S(KC_E), KC_NO},     // み + ょ = みょ
+    [RYA_COMBO] = {KC_L, S(KC_Q), KC_NO},     // り + ゃ = りゃ
+    [RYU_COMBO] = {KC_L, S(KC_W), KC_NO},     // り + ゅ = りゅ
+    [RYO_COMBO] = {KC_L, S(KC_E), KC_NO},     // り + ょ = りょ
+    // 濁音の拗音
+    [GYA_COMBO] = {KC_G, KC_LBRC, S(KC_Q)},   // ぎ + ゃ = ぎゃ
+    [GYU_COMBO] = {KC_G, KC_LBRC, S(KC_W)},   // ぎ + ゅ = ぎゅ
+    [GYO_COMBO] = {KC_G, KC_LBRC, S(KC_E)},   // ぎ + ょ = ぎょ
+    [ZYA_COMBO] = {KC_D, KC_LBRC, S(KC_Q)},   // じ + ゃ = じゃ
+    [ZYU_COMBO] = {KC_D, KC_LBRC, S(KC_W)},   // じ + ゅ = じゅ
+    [ZYO_COMBO] = {KC_D, KC_LBRC, S(KC_E)},   // じ + ょ = じょ
+    [DYA_COMBO] = {KC_A, KC_LBRC, S(KC_Q)},   // ぢ + ゃ = ぢゃ
+    [DYU_COMBO] = {KC_A, KC_LBRC, S(KC_W)},   // ぢ + ゅ = ぢゅ
+    [DYO_COMBO] = {KC_A, KC_LBRC, S(KC_E)},   // ぢ + ょ = ぢょ
+    [BYA_COMBO] = {KC_V, KC_LBRC, S(KC_Q)},   // び + ゃ = びゃ
+    [BYU_COMBO] = {KC_V, KC_LBRC, S(KC_W)},   // び + ゅ = びゅ
+    [BYO_COMBO] = {KC_V, KC_LBRC, S(KC_E)},   // び + ょ = びょ
+    [PYA_COMBO] = {KC_V, KC_RBRC, S(KC_Q)},   // ぴ + ゃ = ぴゃ
+    [PYU_COMBO] = {KC_V, KC_RBRC, S(KC_W)},   // ぴ + ゅ = ぴゅ
+    [PYO_COMBO] = {KC_V, KC_RBRC, S(KC_E)},   // ぴ + ょ = ぴょ
 };
 
 // コンボキーが押されたときの処理
