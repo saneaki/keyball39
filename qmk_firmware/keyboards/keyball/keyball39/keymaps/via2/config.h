@@ -41,3 +41,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // コンボキー設定
 #define COMBO_COUNT 2
 #define COMBO_TERM 50
+
+// VIAで6レイヤーを有効にする
+#define DYNAMIC_KEYMAP_LAYER_COUNT 6
