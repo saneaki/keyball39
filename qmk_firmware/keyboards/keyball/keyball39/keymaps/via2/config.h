@@ -39,7 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define AUTO_MOUSE_DEFAULT_LAYER 1
 
 // コンボキー設定
-#define COMBO_COUNT 2
+#define COMBO_COUNT 61
 #define COMBO_TERM 50
 
 // VIAで6レイヤーを有効にする
