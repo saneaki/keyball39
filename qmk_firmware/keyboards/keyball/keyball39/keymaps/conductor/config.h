@@ -40,7 +40,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define AUTO_MOUSE_TIME 1000
 
 // コンボキー設定
-#define COMBO_COUNT 3
+#define COMBO_COUNT 1
 #define COMBO_TERM 50
 
 // VIAで6レイヤーを有効にする

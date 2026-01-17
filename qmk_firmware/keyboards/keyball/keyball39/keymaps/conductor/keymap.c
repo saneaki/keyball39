@@ -27,20 +27,14 @@ static uint16_t aml_after_click_timeout = 500;   // クリック後500ms
 
 // コンボキーの設定
 enum combo_events {
-    JK_TAB,
-    FD_PSCR,
-    KL_SCRL,   // KL同時押しでスクロール
+    BTN_SCRL,   // 左クリック+右クリック同時押しでスクロール
     COMBO_LENGTH
 };
 
-const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
-const uint16_t PROGMEM fd_combo[] = {KC_F, KC_D, COMBO_END};
-const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
+const uint16_t PROGMEM btn_combo[] = {KC_BTN1, KC_BTN2, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
-    [JK_TAB] = COMBO(jk_combo, KC_TAB),
-    [FD_PSCR] = COMBO(fd_combo, KC_PSCR),
-    [KL_SCRL] = COMBO(kl_combo, SCRL_MO),  // KL同時押しでスクロールモード
+    [BTN_SCRL] = COMBO(btn_combo, SCRL_MO),  // BTN1+BTN2同時押しでスクロールモード
 };
 
 // clang-format off
@@ -163,14 +157,14 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         case 1:
         case 2:
         case 3:
-            // レイヤー0-3: デフォルト設定に戻す
-            rgblight_sethsv_noeeprom(0, 0, 0);  // 一旦オフにして
-            rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_GRADIENT);  // デフォルトモードに戻す
-            break;
-        case 4:
-            // レイヤー4（AML）: 青色に設定
+            // レイヤー0-3: 青色に設定
             rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
             rgblight_sethsv_noeeprom(170, 255, 255);  // 青色 (Hue=170)
+            break;
+        case 4:
+            // レイヤー4（AML）: 赤色に設定
+            rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
+            rgblight_sethsv_noeeprom(0, 255, 255);    // 赤色 (Hue=0)
             break;
         case 5:
             // レイヤー5: 緑色に設定
