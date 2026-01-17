@@ -45,6 +45,11 @@ jobs:
         ls -la __qmk__/keyboards/keyball/keyball39/
         qmk config || true
 
+    - name: Setup QMK with absolute path
+      run: |
+        export QMK_HOME=$(pwd)/__qmk__
+        qmk setup --home $(pwd)/__qmk__ --yes
+
     - name: Compile and link
       run: |
         export QMK_HOME=$(pwd)/__qmk__
