@@ -5,7 +5,7 @@ on:
   workflow_call:
     inputs:
       qmk_version:
-        default: '0.31.8'
+        default: '0.22.14'
         type: string
         required: false
       keyboard:
@@ -32,27 +32,14 @@ jobs:
 
     - name: Checkout qmk_firmware
       uses: ./.github/actions/checkout-qmk_firmware
-      with:
-        version: ${{ inputs.qmk_version }}
 
-    - name: Debug - Show source files before copy
-      run: |
-        echo "Files in qmk_firmware/keyboards/keyball/${{ inputs.keyboard }}/:"
-        ls -la qmk_firmware/keyboards/keyball/${{ inputs.keyboard }}/
+    - name: Install a link to own source
+      run: ln -s $(pwd)/qmk_firmware/keyboards/keyball __qmk__/keyboards/keyball
 
-    - name: Copy keyboard source
-      run: cp -r qmk_firmware/keyboards/keyball __qmk__/keyboards/keyball
-
-    - name: Debug - List keyboard directory
-      run: |
-        echo "pwd=$(pwd)"
-        echo "QMK config:"
-        qmk config || true
-        ls -la __qmk__/keyboards/keyball/
-        ls -la __qmk__/keyboards/keyball/${{ inputs.keyboard }}/
+    - name: Install missing python modules
+      run: /usr/bin/python3 -m pip install -r __qmk__/requirements.txt
 
     - name: Compile and link
-      working-directory: __qmk__
       run: qmk compile -j 4 -kb keyball/${{ inputs.keyboard }} -km ${{ inputs.keymap }}
 
     - name: Archive built firmware
