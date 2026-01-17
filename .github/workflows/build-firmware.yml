@@ -35,8 +35,14 @@ jobs:
       with:
         version: ${{ inputs.qmk_version }}
 
-    - name: Install a link to own source
-      run: ln -s ../../qmk_firmware/keyboards/keyball __qmk__/keyboards/keyball
+    - name: Copy keyboard source
+      run: cp -r qmk_firmware/keyboards/keyball __qmk__/keyboards/keyball
+
+    - name: Debug - List keyboard directory
+      run: |
+        ls -la __qmk__/keyboards/keyball/
+        ls -la __qmk__/keyboards/keyball/keyball39/
+        qmk config
 
     - name: Install missing python modules
       run: python3 -m pip install --break-system-packages -r __qmk__/requirements.txt
