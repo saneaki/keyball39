@@ -25,9 +25,6 @@ jobs:
     container:
       image: ghcr.io/qmk/qmk_cli:latest
 
-    env:
-      QMK_HOME: ${{ github.workspace }}/__qmk__
-
     steps:
 
     - name: Checkout source
@@ -43,15 +40,15 @@ jobs:
 
     - name: Debug - List keyboard directory
       run: |
+        echo "QMK_HOME=$(pwd)/__qmk__"
         ls -la __qmk__/keyboards/keyball/
         ls -la __qmk__/keyboards/keyball/keyball39/
         qmk config || true
 
-    - name: Install missing python modules
-      run: python3 -m pip install --break-system-packages -r __qmk__/requirements.txt
-
     - name: Compile and link
-      run: qmk compile -j 4 -kb keyball/${{ inputs.keyboard }} -km ${{ inputs.keymap }}
+      run: |
+        export QMK_HOME=$(pwd)/__qmk__
+        qmk compile -j 4 -kb keyball/${{ inputs.keyboard }} -km ${{ inputs.keymap }}
 
     - name: Archive built firmware
       uses: actions/upload-artifact@v4
