@@ -33,6 +33,8 @@ jobs:
     - name: Copy keyboard source to container QMK_HOME
       run: |
         echo "Using container default QMK_HOME: $QMK_HOME"
+        ls -la $QMK_HOME/ || echo "QMK_HOME directory listing failed"
+        mkdir -p $QMK_HOME/keyboards/
         cp -r qmk_firmware/keyboards/keyball $QMK_HOME/keyboards/keyball
 
     - name: Debug - List keyboard directory
