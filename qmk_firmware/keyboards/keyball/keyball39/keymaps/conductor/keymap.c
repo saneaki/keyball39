@@ -195,3 +195,9 @@ void oledkit_render_info_user(void) {
     keyball_oled_render_layerinfo();
 }
 #endif
+
+// AML（Auto Mouse Layer）を起動時に有効化
+void pointing_device_init_user(void) {
+    set_auto_mouse_layer(4);        // Layer 4をAMLレイヤーに設定
+    set_auto_mouse_enable(true);    // AMLを有効化
+}
