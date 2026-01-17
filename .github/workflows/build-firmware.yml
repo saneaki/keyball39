@@ -52,6 +52,7 @@ jobs:
         ls -la __qmk__/keyboards/keyball/${{ inputs.keyboard }}/
 
     - name: Compile and link
+      working-directory: __qmk__
       run: qmk compile -j 4 -kb keyball/${{ inputs.keyboard }} -km ${{ inputs.keymap }}
 
     - name: Archive built firmware
