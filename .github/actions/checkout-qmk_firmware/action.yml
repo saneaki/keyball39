@@ -24,4 +24,7 @@ runs:
 
   - name: Setup QMK
     shell: bash
-    run: qmk setup --home ${{ inputs.path }} --yes
+    run: |
+      QMK_PATH=$(pwd)/${{ inputs.path }}
+      echo "Setting up QMK with absolute path: $QMK_PATH"
+      qmk setup --home "$QMK_PATH" --yes
