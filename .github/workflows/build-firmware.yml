@@ -42,7 +42,7 @@ jobs:
       run: |
         ls -la __qmk__/keyboards/keyball/
         ls -la __qmk__/keyboards/keyball/keyball39/
-        qmk config
+        qmk config || true
 
     - name: Install missing python modules
       run: python3 -m pip install --break-system-packages -r __qmk__/requirements.txt
