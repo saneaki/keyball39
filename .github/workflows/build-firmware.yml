@@ -35,6 +35,11 @@ jobs:
       with:
         version: ${{ inputs.qmk_version }}
 
+    - name: Debug - Show source files before copy
+      run: |
+        echo "Files in qmk_firmware/keyboards/keyball/${{ inputs.keyboard }}/:"
+        ls -la qmk_firmware/keyboards/keyball/${{ inputs.keyboard }}/
+
     - name: Copy keyboard source
       run: cp -r qmk_firmware/keyboards/keyball __qmk__/keyboards/keyball
 
