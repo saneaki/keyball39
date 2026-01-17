@@ -30,33 +30,23 @@ jobs:
     - name: Checkout source
       uses: actions/checkout@v4
 
-    - name: Checkout qmk_firmware
-      uses: ./.github/actions/checkout-qmk_firmware
-      with:
-        version: ${{ inputs.qmk_version }}
-
-    - name: Copy keyboard source
-      run: cp -r qmk_firmware/keyboards/keyball __qmk__/keyboards/keyball
+    - name: Copy keyboard source to container QMK_HOME
+      run: |
+        echo "Using container default QMK_HOME: $QMK_HOME"
+        cp -r qmk_firmware/keyboards/keyball $QMK_HOME/keyboards/keyball
 
     - name: Debug - List keyboard directory
       run: |
-        echo "QMK_HOME=$(pwd)/__qmk__"
-        ls -la __qmk__/keyboards/keyball/
-        ls -la __qmk__/keyboards/keyball/keyball39/
+        echo "QMK_HOME=$QMK_HOME"
+        ls -la $QMK_HOME/keyboards/keyball/
+        ls -la $QMK_HOME/keyboards/keyball/${{ inputs.keyboard }}/
         qmk config || true
 
-    - name: Setup QMK with absolute path
-      run: |
-        export QMK_HOME=$(pwd)/__qmk__
-        qmk setup --home $(pwd)/__qmk__ --yes
-
     - name: Compile and link
-      run: |
-        export QMK_HOME=$(pwd)/__qmk__
-        qmk compile -j 4 -kb keyball/${{ inputs.keyboard }} -km ${{ inputs.keymap }}
+      run: qmk compile -j 4 -kb keyball/${{ inputs.keyboard }} -km ${{ inputs.keymap }}
 
     - name: Archive built firmware
       uses: actions/upload-artifact@v4
       with:
         name: ${{ inputs.keyboard }}-${{ inputs.keymap }}-firmware
-        path: __qmk__/*.hex
+        path: /qmk_firmware/*.hex
